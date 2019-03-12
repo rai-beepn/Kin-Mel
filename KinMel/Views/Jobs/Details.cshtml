@@ -1,0 +1,34 @@
+﻿@model KinMel.Models.Jobs
+
+@{
+    Layout = "/Views/Shared/_detailsLayout.cshtml";
+}
+<div class="fields-list">
+    @if (@Model.Salary != null)
+    {
+        <ul class="col s12 m6 m-0">
+            <li>
+                <label asp-for="@Model.Salary"></label>
+                <p> @Html.DisplayFor(m => m.Salary) "</p>
+            </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.WorkingDays))
+    {
+        <ul class="col s12 m6 m-0">
+            <li>
+                <label asp-for="@Model.WorkingDays"></label>
+                <p> @Html.DisplayFor(m => m.WorkingDays)</p>
+            </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.ContractFor))
+    {
+        <ul class="col s12 m6 m-0">
+            <li>
+                <label asp-for="@Model.ContractFor"></label>
+                <p> @Html.DisplayFor(m => m.ContractFor)</p>
+            </li>
+        </ul>
+    }
+</div>>

@@ -1,0 +1,39 @@
+﻿@using System.Globalization
+@model IEnumerable<KinMel.Models.Notification>
+
+@{
+    ViewData["Title"] = "Default";
+}
+@foreach (var item in Model)
+{
+    <li class="collection-item avatar" onmouseover="toggleScaleClass(@item.Id)" onmouseout="toggleScaleClass(@item.Id)">
+        <a id="delNotification-@item.Id" class="scale-out scale-transition" onclick="DeleteNotification(@item.Id)" style="float: right;"><i class="material-icons m-0 p-5">delete_forever</i></a>
+
+        <a class="center p-0" asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.NotificationFrom.UserName">
+            <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />
+            <strong class="content-username">@item.NotificationFrom.UserName</strong>
+        </a>
+        <a asp-controller="Notifications" asp-action="Read" asp-route-id="@item.Id">
+            <span class="title p-0 grey-text text-darken-2">
+                @Html.DisplayFor(modelItem => item.NotificationText)
+            </span>
+            <p class="content-datecreated grey-text">
+                @Html.DisplayFor(modelItem => item.Date.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture))
+            </p>
+        </a>
+    </li>
+}
+<li class="collection-item p-0">
+    <a class="center-align cyan-text" asp-controller="Notifications" asp-action="Index">See All Notifications</a>
+</li>
+
+
+<script type="text/javascript">
+    function DeleteNotification(id) {
+        $.getJSON("notifications/Delete/" + id);
+    };
+    function toggleScaleClass(id) {
+        var textrow = document.getElementById('delNotification-' + id);
+        textrow.classList.toggle("scale-in");
+    };
+</script>

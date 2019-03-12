@@ -1,2 +1,2 @@
-# Kin-Mel
-Online trading web-shop
+# KinMel 
+Buy Sell 

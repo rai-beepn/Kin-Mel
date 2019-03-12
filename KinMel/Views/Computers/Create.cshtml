@@ -1,0 +1,62 @@
+﻿@model KinMel.Models.Computer
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_createLayout.cshtml";
+}
+<b class="col s12">Specifications</b>
+<div class="col s12">
+    <label asp-for="Type"></label>
+    <input asp-for="Type"/>
+    <span asp-validation-for="Type" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Processor"></label>
+    <input asp-for="Processor"/>
+    <span asp-validation-for="Processor" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="ProcessorGeneration"></label>
+    <input asp-for="ProcessorGeneration" />
+    <span asp-validation-for="ProcessorGeneration" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Ram"></label>
+    <input asp-for="Ram" />
+    <span asp-validation-for="Ram" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="GraphicsCard"></label>
+    <input asp-for="GraphicsCard" />
+    <span asp-validation-for="GraphicsCard" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="HDD"></label>
+    <input asp-for="HDD" />
+    <span asp-validation-for="HDD" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="SSD"></label>
+    <input asp-for="SSD" />
+    <span asp-validation-for="SSD" class="red-text"></span>
+</div>
+<div class="input-field col s12 m4">
+    <label asp-for="ScreenType"></label>
+    <input asp-for="ScreenType" />
+    <span asp-validation-for="ScreenType" class="red-text"></span>
+</div>
+<div class="input-field col s12 m4">
+    <label asp-for="ScreenSize"></label>
+    <input asp-for="ScreenSize" />
+    <span asp-validation-for="ScreenSize" class="red-text"></span>
+</div>
+<div class="input-field col s12 m4">
+    <label asp-for="Battery"></label>
+    <input asp-for="Battery" />
+    <span asp-validation-for="Battery" class="red-text"></span>
+</div>
+<div class="input-field col s12">
+    <label asp-for="Features"></label>
+    <input asp-for="Features" />
+    <span asp-validation-for="Features" class="red-text"></span>
+</div>

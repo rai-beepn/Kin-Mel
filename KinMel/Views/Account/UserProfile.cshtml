@@ -1,0 +1,275 @@
+﻿@using Microsoft.EntityFrameworkCore
+@model KinMel.Models.AccountDTO
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="browse-width">
+    <div class="profile-page-grid">
+        <div class="cover-image">
+            <img src="https://picsum.photos/1000/400?image=0" alt="Cover picture" />
+            <div class="profile-header">
+                <div>
+                    <div class="star-rating-empty tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="white-text m-0">| @Model.Ratings.Count |</p>
+                    </div>
+                    <div class="star-rating tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
+                        @for (var i = 1; i <= Model.AverageStars; i++)
+                        {
+                            <i class="material-icons pink-text">star</i>
+
+                            if ((Model.AverageStars - i) > 0 && (Model.AverageStars - i) < 1)
+                            {
+                                <i class="material-icons pink-text">star_half</i>
+                            }
+                        }
+                    </div>
+                </div>
+                <!--TopHeader-->
+                <div class="profile-username white-text">
+                    @Html.DisplayFor(model => model.FullName)
+                </div>
+                <!--joined Date-->
+                <div class="profile-joindate grey-text text-lighten-2">
+                    Joined on @Html.DisplayFor(model => model.JoinDate)
+                </div>
+            </div>
+            <!--SideCard-->
+            <div class="side-content-grid card z-depth-4">
+                <div class="profile-picture">
+                    @if (!string.IsNullOrWhiteSpace(@Model.ProfilePictureUrl))
+                    {
+                        <img src="@Model.ProfilePictureUrl" alt="@Model.FullName's Profile Picture" />
+                    }
+                </div>
+                <div class="about-me grey lighten-4 card-content">
+                    <b>About me!</b>
+                    <p>
+                        Hi I am from Kathmandu, currently studying Computer Science in Denmark.
+                        I just love using different trending gadgets.
+                        I usually buy electronics and gadgets online and I think buying used items can sometimes be economic.
+                        I encourage everyone to try buying used items responsibly.
+                    </p>
+                    <a class="pink-text text-darken-3">Read more<i class="material-icons align-middle">arrow_forward</i></a>
+                </div>
+                <ul>
+                    <li>
+                        <label asp-for="Email"></label>
+                        <p>@Html.DisplayFor(model => model.Email)</p>
+                    </li>
+                    <li>
+                        <label asp-for="PhoneNumber"></label>
+                        @if (Model.PhoneNumberConfirmed == true)
+                        {
+                            <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons cyan-text tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i></p>
+                        }
+                        else
+                        {
+                            <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons red-text tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i></p>
+                        }
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </li>
+                    <li>
+                        <label asp-for="City"></label>
+                        <p>@Html.DisplayFor(model => model.City)</p>
+                    </li>
+                </ul>
+            </div>
+            <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id" class="waves-effect waves-light btn pink tooltipped" data-tooltip="Give a rating and review to the user." data-position="left">
+                <i class="material-icons left">star</i>Rate this user
+            </a>
+        </div>
+    </div>
+</div>
+<!--About-me-for-small-->
+<div class="about-me-small-grid">
+    <ul>
+        <li>
+            <label asp-for="Email"></label>
+            <p>@Html.DisplayFor(model => model.Email)</p>
+        </li>
+        <li>
+            <label asp-for="PhoneNumber"></label>
+            @if (Model.PhoneNumberConfirmed == true)
+            {
+                <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons cyan-text tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i></p>
+            }
+            else
+            {
+                <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons red-text tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i></p>
+            }
+            <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+        </li>
+        <li>
+            <label asp-for="City"></label>
+            <p>@Html.DisplayFor(model => model.City)</p>
+        </li>
+    </ul>
+    <div class="grey lighten-4 card-content">
+        <b>About me!</b>
+        <p>
+            Hi I am from Kathmandu, currently studying Computer Science in Denmark.
+            I just love using different trending gadgets.
+            I usually buy electronics and gadgets online and I think buying used items can sometimes be economic.
+            I encourage everyone to try buying used items responsibly.
+        </p>
+        <a class="pink-text text-darken-3">Read more<i class="material-icons align-middle">arrow_forward</i></a>
+    </div>
+</div>
+<!--Ads from user-->
+<div class="browse-width profile-content-grid">
+    <div></div>
+    <div class="profile-ads">
+        <div class="card-header">
+            Latest Ads from @Model.UserName | @Model.ClassifiedAds.Count |
+        </div>
+        @if (Model.ClassifiedAds != null)
+        {
+            if (Model.ClassifiedAds.Any())
+            {
+                <!--grid-view-->
+                <div class="main-content-cards hide-on-small-and-down p-5">
+                    @foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
+                    {
+                        <div class="card hoverable m-0">
+                            <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
+                                @if (classifiedAd.IsSold)
+                                {
+                                    <p class="content-sold red white-text pulse">Sold</p>
+                                }
+                                <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
+                                    <img class="content-image-grid" src="@classifiedAd.PrimaryImageUrl" />
+                                    <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</span>
+                                </div>
+                                <div class="card-content pt-5">
+                                    <p class="content-datecreated">Posted on: @Html.DisplayFor(modelclassifiedAd => classifiedAd.DateCreated)</p>
+                                    <span class="card-title grey-text text-darken-4 mb-0">
+                                        <b class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</b>
+                                    </span>
+                                    @if (@classifiedAd.Condition == "NEW")
+                                    {
+                                        <a class="content-condition btn-large red darken-1 activator">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition)</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="content-condition btn-large cyan darken-3 activator">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition)</a>
+                                    }
+                                    <div class="chip">
+                                        <img src="@classifiedAd.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
+                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.UserName)</a>
+                                    </div>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">
+                                        <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
+                                        <i class="material-icons right">close</i>
+                                    </span>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.UsedFor): @Html.DisplayFor(modelItem => classifiedAd.UsedFor)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.PriceNegotiable): @Html.DisplayFor(modelItem => classifiedAd.PriceNegotiable)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Address): @Html.DisplayFor(modelItem => classifiedAd.Address)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.City): @Html.DisplayFor(modelItem => classifiedAd.City)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Delivery): @Html.DisplayFor(modelItem => classifiedAd.Delivery)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.DeliveryCharges): @Html.DisplayFor(modelItem => classifiedAd.DeliveryCharges)</p>
+                                    <p class="content-datecreated">@Html.LabelFor(modelItem => classifiedAd.DateCreated): @Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <!--list view-->
+                <div class="hide-on-med-and-up">
+                    @foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
+                    {
+                        <div class="display-flex">
+                            <div class="image-container-list">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
+                                    <img class="content-image-list" src="@classifiedAd.ImageUrlList.FirstOrDefault()" />
+                                </a>
+                            </div>
+                            <div class="contents-list">
+                                <div>
+                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</a>
+                                    @if (@classifiedAd.Condition == "NEW")
+                                    {
+                                        <a class="content-condition-list red-text darken-1">(@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition))</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="content-condition-list grey-text text-darken-3">(@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition))</a>
+                                    }
+                                </div>
+                                <div>
+                                    <div>
+                                        <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.UsedFor): @Html.DisplayFor(modelItem => classifiedAd.UsedFor)</p>
+                                        <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Address): @Html.DisplayFor(modelItem => classifiedAd.Address), @Html.DisplayFor(modelItem => classifiedAd.City)</p>
+                                        <p class="material-icons align-middle">person_outline</p>
+                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.UserName)</a>
+                                    </div>
+                                    <div>
+                                        <p class="content-datecreated">@Html.DisplayFor(modelclassifiedAd => classifiedAd.DateCreated)</p>
+                                        <p class="content-price right-align">Rs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </div>
+            }
+
+        }
+    </div>
+</div>
+
+<!--user reviews-->
+<div class="browse-width profile-content-grid">
+    <div></div>
+    <div class="profile-ads">
+        <div class="card-header">
+            Reviews about @Model.FirstName | @Model.Ratings.Count |
+        </div>
+        @if (Model.Ratings != null)
+        {
+            if (Model.Ratings.Any())
+            {
+                foreach (Rating rating in Model.Ratings)
+                {
+                    <div class="profile-reviews-grid">
+                        <div>
+                            <img src="@rating.RatedBy.ProfilePictureUrl" />
+                            <a asp-controller="Account" asp-route-id=@rating.RatedBy.UserName class="content-username align-middle"> @Html.DisplayFor(r => rating.RatedBy.UserName)</a>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="star-rating-empty tooltipped white" data-tooltip="Rating: @rating.Stars" data-position="left">
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                </div>
+                                <div class="star-rating tooltipped" data-tooltip="Rating: @rating.Stars" data-position="left">
+                                    @for (var i = 1; i <= rating.Stars; i++)
+                                    {
+                                        <i class="material-icons pink-text">star</i>
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                @Html.DisplayFor(r => rating.Review)
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+            }
+        }
+    </div>
+</div>

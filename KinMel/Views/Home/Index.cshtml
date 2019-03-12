@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<partial name="_sliderRevolutionPartial" />
+
+<section class="browse-width">
+    <div class="page-container-grid">
+        <!--Side-Content-->
+        @await Html.PartialAsync("_categoriesSideMenu")
+        <!--Main-Content-->
+        <div class="index-content">
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Latest Ads" })</div>
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Popular Ads" })</div>
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Free Ads" })</div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,77 @@
+﻿@model KinMel.Models.Car
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_createLayout.cshtml";
+}
+<b class="col s12">Specifications</b>
+<div class="input-field col s12 m6">
+    <label asp-for="Type"></label>
+    <input asp-for="Type" />
+    <span asp-validation-for="Type" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Brand"></label>
+    <input asp-for="Brand" />
+    <span asp-validation-for="Brand" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Model"></label>
+    <input asp-for="Model" />
+    <span asp-validation-for="Model" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="ModelYear"></label>
+    <input asp-for="ModelYear" />
+    <span asp-validation-for="ModelYear" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6 l4">
+    <label asp-for="Engine"></label>
+    <input asp-for="Engine" />
+    <span asp-validation-for="Engine" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6 l4">
+    <label asp-for="Transmission"></label>
+    <input asp-for="Transmission" />
+    <span asp-validation-for="Transmission" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6 l4">
+    <label asp-for="Mileage"></label>
+    <input asp-for="Mileage" />
+    <span asp-validation-for="Mileage" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="RegisteredDistrict"></label>
+    <input asp-for="RegisteredDistrict" />
+    <span asp-validation-for="RegisteredDistrict" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="LotNo"></label>
+    <input asp-for="LotNo" />
+    <span asp-validation-for="LotNo" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Color"></label>
+    <input asp-for="Color" />
+    <span asp-validation-for="Color" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="TotalKm"></label>
+    <input asp-for="TotalKm" />
+    <span asp-validation-for="TotalKm" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="FuelType"></label>
+    <input asp-for="FuelType" />
+    <span asp-validation-for="FuelType" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="DoorsNo"></label>
+    <input asp-for="DoorsNo" />
+    <span asp-validation-for="DoorsNo" class="red-text"></span>
+</div>
+<div class="input-field col s12">
+    <label asp-for="Features"></label>
+    <input asp-for="Features" />
+    <span asp-validation-for="Features" class="red-text"></span>
+</div>

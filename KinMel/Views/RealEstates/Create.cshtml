@@ -1,0 +1,37 @@
+﻿@model KinMel.Models.RealEstate
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_createLayout.cshtml";
+}
+<b class="col s12">Specifications</b>
+<div class="input-field col s12">
+    <label asp-for="PropertyType"></label>
+    <input asp-for="PropertyType"/>
+    <span asp-validation-for="PropertyType" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="LandSize"></label>
+    <input asp-for="LandSize"/>
+    <span asp-validation-for="LandSize" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Floors"></label>
+    <input asp-for="Floors"/>
+    <span asp-validation-for="Floors" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="TotalRooms"></label>
+    <input asp-for="TotalRooms"/>
+    <span asp-validation-for="TotalRooms" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Furnishing"></label>
+    <input asp-for="Furnishing"/>
+    <span asp-validation-for="Furnishing" class="red-text"></span>
+</div>
+<div class="input-field col s12">
+    <label asp-for="Features"></label>
+    <input asp-for="Features"/>
+    <span asp-validation-for="Features" class="red-text"></span>
+</div>
